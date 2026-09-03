@@ -588,24 +588,6 @@
         .join("");
     }
 
-    const listaAlertas = document.getElementById("dash-alertas");
-    const alertas = items.filter((i) => statusItem(i) !== "ok");
-    if (!alertas.length) {
-      listaAlertas.innerHTML = '<div class="empty">nenhum alerta de estoque no momento</div>';
-    } else {
-      listaAlertas.innerHTML = alertas
-        .map((i) => {
-          const s = statusItem(i);
-          return `
-          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px;">
-            <span>${escapeHtml(i.nome)}</span>
-            <span class="stamp ${s}">${statusLabel(s)} · ${i.quantidade}/${i.qtd_minima}</span>
-          </div>`;
-        })
-        .join("");
-    }
-  }
-
   document.getElementById("btn-export").addEventListener("click", () => {
     if (typeof XLSX === "undefined") {
       toast("Biblioteca de exportação não carregou.", true);
