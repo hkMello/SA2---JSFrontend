@@ -19,23 +19,23 @@
       <button id="tab-register" type="button">Criar conta</button>
     </div>
 
-    <div class="login-error" id="login-error"></div>
+    <div class="login-error" id="login-error" role="alert"></div>
 
     <form id="form-login">
-      <label>Usuário</label>
+      <label for="login-user">Usuário</label>
       <input type="text" id="login-user" autocomplete="username" required>
       <div style="height:12px;"></div>
-      <label>Senha</label>
+      <label for="login-pass">Senha</label>
       <input type="password" id="login-pass" autocomplete="current-password" required>
       <div style="height:18px;"></div>
       <button type="submit" class="btn" style="width:100%;">Entrar</button>
     </form>
 
     <form id="form-register" style="display:none;">
-      <label>Novo usuário</label>
+      <label for="reg-user">Novo usuário</label>
       <input type="text" id="reg-user" minlength="3" required>
       <div style="height:12px;"></div>
-      <label>Senha (mín. 8 caracteres)</label>
+      <label for="reg-pass">Senha (mín. 8 caracteres)</label>
       <input type="password" id="reg-pass" minlength="8" required>
       <div style="height:18px;"></div>
       <button type="submit" class="btn teal" style="width:100%;">Criar conta</button>
@@ -54,21 +54,21 @@
       </div>
     </div>
     <div class="header-right">
-      <button id="btn-export">⬇ Exportar Excel</button>
+      <button id="btn-export" type="button">⬇ Exportar Excel</button>
       <div class="user-chip">
         <span id="user-name"></span>
         <span class="role-badge" id="user-role"></span>
       </div>
-      <button id="btn-logout">Sair</button>
+      <button id="btn-logout" type="button">Sair</button>
     </div>
   </header>
 
   <nav>
-    <button class="nav-btn active" data-view="dashboard">Painel</button>
-    <button class="nav-btn" data-view="estoque">Estoque</button>
-    <button class="nav-btn" data-view="movimentacoes">Movimentações</button>
-    <button class="nav-btn" data-view="fornecedores">Fornecedores</button>
-    <button class="nav-btn" data-view="usuarios" id="nav-usuarios" style="display:none;">Usuários</button>
+    <button class="nav-btn active" type="button" data-view="dashboard">Painel</button>
+    <button class="nav-btn" type="button" data-view="estoque">Estoque</button>
+    <button class="nav-btn" type="button" data-view="movimentacoes">Movimentações</button>
+    <button class="nav-btn" type="button" data-view="fornecedores">Fornecedores</button>
+    <button class="nav-btn" type="button" id="nav-usuarios" data-view="usuarios" style="display:none;">Usuários</button>
   </nav>
 
   <main>
@@ -96,12 +96,12 @@
         <div class="panel-head"><h2>Novo item</h2></div>
         <div class="panel-body">
           <form id="form-item" class="form-grid" data-validated-form>
-            <div><label>Nome</label><input type="text" id="item-nome" data-validate="required" required></div>
-            <div><label>Categoria</label><input type="text" id="item-categoria" placeholder="ex: limpeza"></div>
-            <div><label>Quantidade</label><input type="number" id="item-qtd" min="0" data-validate="number" required></div>
-            <div><label>Qtd. mínima</label><input type="number" id="item-min" min="0" value="5" data-validate="number"></div>
-            <div><label>Preço unit. (R$)</label><input type="number" id="item-preco" min="0" step="0.01" data-validate="positive-number" required></div>
-            <div><label>Fornecedor</label><select id="item-fornecedor"><option value="">— nenhum —</option></select></div>
+            <div><label for="item-nome">Nome</label><input type="text" id="item-nome" data-validate="required" required></div>
+            <div><label for="item-categoria">Categoria</label><input type="text" id="item-categoria" placeholder="ex: limpeza"></div>
+            <div><label for="item-qtd">Quantidade</label><input type="number" id="item-qtd" min="0" data-validate="number" required></div>
+            <div><label for="item-min">Qtd. mínima</label><input type="number" id="item-min" min="0" value="5" data-validate="number"></div>
+            <div><label for="item-preco">Preço unit. (R$)</label><input type="number" id="item-preco" min="0" step="0.01" data-validate="positive-number" required></div>
+            <div><label for="item-fornecedor">Fornecedor</label><select id="item-fornecedor"><option value="">— nenhum —</option></select></div>
             <div><button type="submit" class="btn">Adicionar</button></div>
           </form>
         </div>
@@ -145,12 +145,12 @@
         <div class="panel-head"><h2>Registrar movimentação</h2></div>
         <div class="panel-body">
           <form id="form-mov" class="form-grid" data-validated-form>
-            <div><label>Item</label><select id="mov-item" required></select></div>
-            <div><label>Tipo</label>
+            <div><label for="mov-item">Item</label><select id="mov-item" required></select></div>
+            <div><label for="mov-tipo">Tipo</label>
               <select id="mov-tipo"><option value="entrada">Entrada</option><option value="saida">Saída</option></select>
             </div>
-            <div><label>Quantidade</label><input type="number" id="mov-qtd" min="1" data-validate="positive-number" required></div>
-            <div><label>Motivo</label><input type="text" id="mov-motivo" placeholder="ex: compra, venda, perda"></div>
+            <div><label for="mov-qtd">Quantidade</label><input type="number" id="mov-qtd" min="1" data-validate="positive-number" required></div>
+            <div><label for="mov-motivo">Motivo</label><input type="text" id="mov-motivo" placeholder="ex: compra, venda, perda"></div>
             <div><button type="submit" class="btn teal">Registrar</button></div>
           </form>
         </div>
@@ -173,9 +173,9 @@
         <div class="panel-head"><h2>Novo fornecedor</h2></div>
         <div class="panel-body">
           <form id="form-fornecedor" class="form-grid" data-validated-form>
-            <div><label>Nome</label><input type="text" id="forn-nome" data-validate="required" required></div>
-            <div><label>Contato</label><input type="text" id="forn-contato" placeholder="telefone / e-mail"></div>
-            <div><label>Cidade</label><input type="text" id="forn-cidade"></div>
+            <div><label for="forn-nome">Nome</label><input type="text" id="forn-nome" data-validate="required" required></div>
+            <div><label for="forn-contato">Contato</label><input type="text" id="forn-contato" placeholder="telefone / e-mail"></div>
+            <div><label for="forn-cidade">Cidade</label><input type="text" id="forn-cidade"></div>
             <div><button type="submit" class="btn">Adicionar</button></div>
           </form>
         </div>
@@ -198,9 +198,9 @@
         <div class="panel-head"><h2>Criar novo usuário</h2></div>
         <div class="panel-body">
           <form id="form-usuario" class="form-grid" data-validated-form>
-            <div><label>Usuário</label><input type="text" id="user-novo-nome" minlength="3" data-validate="required" required></div>
-            <div><label>Senha</label><input type="password" id="user-novo-senha" minlength="8" data-validate="required" required></div>
-            <div><label>Papel</label>
+            <div><label for="user-novo-nome">Usuário</label><input type="text" id="user-novo-nome" minlength="3" data-validate="required" required></div>
+            <div><label for="user-novo-senha">Senha</label><input type="password" id="user-novo-senha" minlength="8" data-validate="required" required></div>
+            <div><label for="user-novo-role">Papel</label>
               <select id="user-novo-role"><option value="operador">Operador</option><option value="admin">Admin</option></select>
             </div>
             <div><button type="submit" class="btn">Criar usuário</button></div>
@@ -220,17 +220,17 @@
     <div class="modal-body">
       <form id="form-editar-item" data-validated-form>
         <input type="hidden" id="edit-id">
-        <label>Nome</label><input type="text" id="edit-nome" data-validate="required" required>
+        <label for="edit-nome">Nome</label><input type="text" id="edit-nome" data-validate="required" required>
         <div style="height:10px;"></div>
-        <label>Categoria</label><input type="text" id="edit-categoria">
+        <label for="edit-categoria">Categoria</label><input type="text" id="edit-categoria">
         <div style="height:10px;"></div>
-        <label>Quantidade</label><input type="number" id="edit-qtd" min="0" data-validate="number" required>
+        <label for="edit-qtd">Quantidade</label><input type="number" id="edit-qtd" min="0" data-validate="number" required>
         <div style="height:10px;"></div>
-        <label>Qtd. mínima</label><input type="number" id="edit-min" min="0" data-validate="number">
+        <label for="edit-min">Qtd. mínima</label><input type="number" id="edit-min" min="0" data-validate="number">
         <div style="height:10px;"></div>
-        <label>Preço unit. (R$)</label><input type="number" id="edit-preco" min="0" step="0.01" data-validate="positive-number" required>
+        <label for="edit-preco">Preço unit. (R$)</label><input type="number" id="edit-preco" min="0" step="0.01" data-validate="positive-number" required>
         <div style="height:10px;"></div>
-        <label>Fornecedor</label><select id="edit-fornecedor"><option value="">— nenhum —</option></select>
+        <label for="edit-fornecedor">Fornecedor</label><select id="edit-fornecedor"><option value="">— nenhum —</option></select>
         <div class="modal-actions">
           <button type="button" class="btn ghost" id="modal-editar-cancelar">Cancelar</button>
           <button type="submit" class="btn">Salvar alterações</button>
@@ -253,7 +253,7 @@
   </div>
 </div>
 
-<div id="toast-container"></div>
+<div id="toast-container" aria-live="polite" aria-atomic="true"></div>
 
 <script src="validacao-formularios.js"></script>
 <script src="script.js"></script>
