@@ -130,6 +130,7 @@
   const filtroStatus = document.getElementById("filtro-status");
 
   let ordenacao = { campo: null, dir: 1 };
+  const thsOrdenaveis = document.querySelectorAll('#tabela-estoque th[data-sort]');
 
   formItem.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -164,7 +165,7 @@
   filtroBusca.addEventListener("input", renderEstoque);
   filtroStatus.addEventListener("change", renderEstoque);
 
-  document.querySelectorAll('#tabela-estoque th[data-sort]').forEach((th) => {
+  thsOrdenaveis.forEach((th) => {
     th.addEventListener("click", () => {
       const campo = th.dataset.sort;
       if (ordenacao.campo === campo) {
@@ -210,7 +211,7 @@
     const lista = itensFiltradosOrdenados();
     tbodyEstoque.innerHTML = "";
 
-    document.querySelectorAll('#tabela-estoque th[data-sort]').forEach((th) => {
+    thsOrdenaveis.forEach((th) => {
       th.querySelector(".arrow")?.remove();
       if (th.dataset.sort === ordenacao.campo) {
         const arrow = document.createElement("span");
@@ -485,21 +486,23 @@
   }
 
   const listaAlertas = document.getElementById("dash-alertas");
+
+  function renderAlertas() {
     const alertas = items.filter((i) => statusItem(i) !== "ok");
     if (!alertas.length) {
       listaAlertas.innerHTML = '<div class="empty">nenhum alerta de estoque no momento</div>';
-    } else {
-      listaAlertas.innerHTML = alertas
-        .map((i) => {
-          const s = statusItem(i);
-          return `
-          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px;">
-            <span>${escapeHtml(i.nome)}</span>
-            <span class="stamp ${s}">${statusLabel(s)} · ${i.quantidade}/${i.qtd_minima}</span>
-          </div>`;
-        })
-        .join("");
+      return;
     }
+    listaAlertas.innerHTML = alertas
+      .map((i) => {
+        const s = statusItem(i);
+        return `
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px;">
+          <span>${escapeHtml(i.nome)}</span>
+          <span class="stamp ${s}">${statusLabel(s)} · ${i.quantidade}/${i.qtd_minima}</span>
+        </div>`;
+      })
+      .join("");
   }
  
   const formFornecedor = document.getElementById("form-fornecedor");
@@ -605,6 +608,7 @@
         )
         .join("");
     }
+  }
 
   document.getElementById("btn-export").addEventListener("click", () => {
     if (typeof XLSX === "undefined") {
@@ -656,6 +660,7 @@
     renderMovimentacoes();
     renderFornecedores();
     renderDashboard();
+    renderAlertas();
   }
 
   function init() {
